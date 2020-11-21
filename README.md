@@ -2,16 +2,12 @@
 
 An open source clone of Puzzle League written in Java using LibGDX
 
-(Desktop builds are available on the [releases page](https://github.com)... Not!)
-
 This project is licensed under [MIT](LICENSE).
 
 **Table of contents**:
 
 1. [Disclaimer](#disclaimer)
 2. [Building](#building)
-3. [How to Play](#how-to-play)
-4. [Contributing](#contributing)
 
 ## Disclaimer
 
@@ -31,26 +27,3 @@ To build the project:
 4. You're done! The generated files are under `build`:
    1. Desktop build is under `desktop/build/libs/*.jar`
    2. Android build is under `android/build/outputs/apk/debug/*.apk`
-   
-   TBD - CHANGE THE BUILD VARIANTS (Not debug)
-
-## How to Play
-TBD
-
-## Contributing
-
-TBD, template text below
-
-All you need to do is make sure you did not violate any of the following:
-- New sounds must be either *yours* or be under a `Creative Commons` license.
-  The same applies to new textures.
-- There is no real rule when writing code to patch a bug or adding features.
-  Just make sure it's readable enough and comment whenever reasonable.
-- Make sure you add yourself (in **alphabetical order**) to the
-  `CONTRIBUTORS.md` file
-
-## Contributors
-
-This part isn't true... yet?
-
-Check out the [`CONTRIBUTORS.md`](CONTRIBUTORS.md) file!
