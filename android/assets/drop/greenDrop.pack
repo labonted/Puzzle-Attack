@@ -1,0 +1,40 @@
+
+greenDrop.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+GreenDrop10001
+  rotate: false
+  xy: 1, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+GreenDrop10005
+  rotate: false
+  xy: 1, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+GreenDrop10002
+  rotate: false
+  xy: 103, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+GreenDrop10003
+  rotate: false
+  xy: 205, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+GreenDrop10004
+  rotate: false
+  xy: 307, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1

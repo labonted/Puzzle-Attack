@@ -1,0 +1,40 @@
+
+cursor.png
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+frame-001
+  rotate: false
+  xy: 0, 0
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+frame-002
+  rotate: false
+  xy: 102, 0
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+frame-003
+  rotate: false
+  xy: 204, 0
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+frame-004
+  rotate: false
+  xy: 102, 0
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+frame-005
+  rotate: false
+  xy: 0, 0
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1

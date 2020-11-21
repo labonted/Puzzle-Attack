@@ -1,0 +1,54 @@
+
+keycursor.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+keycursor0001
+  rotate: false
+  xy: 1, 1
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+keycursor0002
+  rotate: false
+  xy: 203, 1
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+keycursor0003
+  rotate: false
+  xy: 405, 1
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+keycursor0004
+  rotate: false
+  xy: 607, 1
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+keycursor0005
+  rotate: false
+  xy: 405, 1
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+keycursor0006
+  rotate: false
+  xy: 203, 1
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
+keycursor0007
+  rotate: false
+  xy: 1, 1
+  size: 200, 100
+  orig: 200, 100
+  offset: 0, 0
+  index: -1
