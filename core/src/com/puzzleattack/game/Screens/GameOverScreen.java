@@ -21,22 +21,18 @@ import com.puzzleattack.game.PuzzleAttack;
 
 import java.util.Locale;
 
-/**
- * Created by dlabonte on 24/11/2016.
- */
-
 public class GameOverScreen implements Screen {
     private PuzzleAttack game;
     private AssetManager manager;
 
-    private static Texture background, hudImage, hudborder, playField, backgroundTexture;
+    private static Texture background, hudborder, playField, backgroundTexture, pipe;
 
     private BitmapFont font;
 
     private OrthographicCamera gameCam;
     private Viewport gamePort;
 
-    //button shit
+    //button stuff
     private Skin skin;
     private Stage stage;
 
@@ -52,33 +48,33 @@ public class GameOverScreen implements Screen {
 
         //textures
         backgroundTexture = borderTexture;
-        background = new Texture("background.png");
+        background = manager.get("TiledBack.jpg", Texture.class);
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         hudborder= new Texture("border.png");
         playField = new Texture("Playfield.png");
-        hudImage = new Texture("Hud/HUD1.png");
+        pipe = manager.get("pipe.png", Texture.class);
 
-
-        // button shit
+        // button stuff
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
         skin = new Skin();
 
-        // Generate a texture and store it in the skin named "white".
+        // Generate a texture and store it in the skin named "button".
         Pixmap pixmap = new Pixmap(500, 200, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.BLUE);
         pixmap.fill();
 
-        skin.add("white", new Texture(pixmap));
+        skin.add("button", new Texture(pixmap));
         skin.add("default",font);
 
         //Configure a TextButton
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
 
-        textButtonStyle.up = skin.newDrawable("white", Color.DARK_GRAY);
-        textButtonStyle.down = skin.newDrawable("white", Color.BLUE);
-        textButtonStyle.checked = skin.newDrawable("white", Color.BLUE);
-        textButtonStyle.over = skin.newDrawable("white", Color.YELLOW);
+        textButtonStyle.up = skin.newDrawable("button", Color.DARK_GRAY);
+        textButtonStyle.down = skin.newDrawable("button", Color.BLUE);
+        textButtonStyle.checked = skin.newDrawable("button", Color.BLUE);
+        textButtonStyle.over = skin.newDrawable("button", Color.YELLOW);
 
         textButtonStyle.font = skin.getFont("default");
 
@@ -120,15 +116,16 @@ public class GameOverScreen implements Screen {
         game.batch.begin();
 
         //Render Playfield
-        game.batch.draw(background, -850, 0, 2560, 1440);
-        game.batch.draw(hudImage, 0, 1110);
+        game.batch.draw(background, (int)(gameCam.viewportWidth/2) * -1 , (int)(gameCam.viewportHeight/2) * -1, (int)(gameCam.viewportWidth), (int)(gameCam.viewportHeight), (int)(gameCam.viewportWidth * 1.5), (int)(gameCam.viewportHeight * 1.5));
         game.batch.draw(backgroundTexture, 0, 0);
         game.batch.draw(hudborder, 0, 0);
         game.batch.draw(playField, 60, 0);
 
-        font.draw(game.batch, "Score: " + score.toString(), 250, 700);
-        font.draw(game.batch, String.format(Locale.CANADA, "%02d:%02d", time / 60, time % 60), 370, 900);
-        font.draw(game.batch, "Time: ", 230, 900);
+        font.draw(game.batch, "Score:", 220, 745);
+        font.draw(game.batch, score.toString(), 390, 745);
+        font.draw(game.batch, String.format(Locale.CANADA, "%02d:%02d", time / 60, time % 60), 390, 615);
+        font.draw(game.batch, "Time: ", 220, 615);
+        game.batch.draw(pipe, 35, (pipe.getHeight() * -1));
 
         game.batch.end();
 

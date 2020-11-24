@@ -13,9 +13,6 @@ import com.puzzleattack.game.PuzzleAttack;
 
 import java.util.Locale;
 
-/**
- * Created by Dylan on 2016-01-22.
- */
 public class Hud {
 
     public Stage stage;

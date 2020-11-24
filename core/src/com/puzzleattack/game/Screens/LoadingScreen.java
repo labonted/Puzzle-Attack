@@ -9,8 +9,10 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.puzzleattack.game.PuzzleAttack;
@@ -19,9 +21,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by Dylan on 2016-05-08.
- */
 public class LoadingScreen implements Screen{
 
     private AssetManager manager;
@@ -57,11 +56,13 @@ public class LoadingScreen implements Screen{
         manager.load("audio/sounds/combo.ogg", Sound.class);
         manager.load("border.png", Texture.class);
         manager.load("borderColor.png", Texture.class);
+        manager.load("pipe.png", Texture.class);
         manager.load("slidebar.png", Texture.class);
+        manager.load("TiledBack.jpg", Texture.class);
 
-
-        background = new Texture("background.png");
+        background = new Texture("TiledBack.jpg");
         background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         font = new BitmapFont(Gdx.files.internal("fonts/font.fnt"),
                 Gdx.files.internal("fonts/font.png"), false);
@@ -70,6 +71,7 @@ public class LoadingScreen implements Screen{
         gameCam.setToOrtho(false, PuzzleAttack.V_WIDTH, PuzzleAttack.V_HEIGHT);
         gamePort = new ExtendViewport(PuzzleAttack.V_WIDTH, PuzzleAttack.V_HEIGHT, gameCam);
         gameCam.position.set(PuzzleAttack.V_WIDTH/2, PuzzleAttack.V_HEIGHT/2, 0);
+
     }
 
     public void render (float delta) {
@@ -80,7 +82,7 @@ public class LoadingScreen implements Screen{
         game.batch.begin();
         progress = (int)(manager.getProgress() * 100);
 
-        game.batch.draw(background, -850, 0, 2560, 1440);
+        game.batch.draw(background, (int)(gameCam.viewportWidth/2) * -1 , (int)(gameCam.viewportHeight/2) * -1, (int)(gameCam.viewportWidth), (int)(gameCam.viewportHeight), (int)(gameCam.viewportWidth * 1.5), (int)(gameCam.viewportHeight * 1.5));
         font.draw(game.batch, "LOADING", 140, 1200);
         font.draw(game.batch,Integer.toString(progress) + "%", 140, 1000);
         if(manager.update()) {

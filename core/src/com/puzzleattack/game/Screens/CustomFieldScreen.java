@@ -29,13 +29,7 @@ import org.w3c.dom.css.RGBColor;
 
 import java.util.ArrayList;
 
-
-
-/**
- * Created by Dylan on 2016-05-28.
- */
 public class CustomFieldScreen implements Screen {
-
 
     private PuzzleAttack game;
     private AssetManager manager;
@@ -47,7 +41,7 @@ public class CustomFieldScreen implements Screen {
     private Music music;
     private Sound testSound;
     private Float soundTimer;
-    private static Texture background, border, backgroundTexture;
+    private static Texture background, border, backgroundTexture, pipe;
     private Pixmap borderBackground, readBackground;
     private int updateCounter;
     ArrayList<Vector2> pixels;
@@ -75,8 +69,11 @@ public class CustomFieldScreen implements Screen {
 
         skin = new Skin();
 
-        background = new Texture("background.png");
-        background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        background = manager.get("TiledBack.jpg", Texture.class);
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+
+        pipe = manager.get("pipe.png", Texture.class);
+        pipe.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Pixmap pixmap = new Pixmap(500, 200, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.BLUE);
@@ -244,12 +241,13 @@ public class CustomFieldScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
 
         game.batch.begin();
-        game.batch.draw(background, -850, 0, 2560, 1440);
+        game.batch.draw(background, (int)(gameCam.viewportWidth/2) * -1 , (int)(gameCam.viewportHeight/2) * -1, (int)(gameCam.viewportWidth), (int)(gameCam.viewportHeight), (int)(gameCam.viewportWidth * 1.5), (int)(gameCam.viewportHeight * 1.5));
         game.batch.draw(backgroundTexture,0, 0);
         game.batch.draw(border, 0, 0);
         font.draw(game.batch, "Red", 130, 900);
         font.draw(game.batch, "Green", 130, 750);
         font.draw(game.batch, "Blue", 130, 600);
+        game.batch.draw(pipe, 35, (pipe.getHeight() * -1));
         game.batch.end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
@@ -277,26 +275,6 @@ public class CustomFieldScreen implements Screen {
         } else
             updateCounter++;
     }
-
-    /*public void checkColour(){
-
-        ArrayList<Vector2> pixels = new ArrayList<Vector2>();
-
-        if(updateCounter == 2) {
-            //backgroundTexture = new Texture(borderBackground);
-            for (int x = 0; x < borderBackground.getWidth(); x++) {
-                for (int y = 0; y < borderBackground.getHeight(); y++) {
-                    if (readBackground.getPixel(x, y) == Color.rgba8888(Color.BLACK)) {
-                        pixels.add(new Vector2(x, y));
-
-                        //borderBackground.drawPixel(x, y, Color.rgba8888(game.red, game.green, game.blue, 1));
-                    }
-                }
-            }
-            updateCounter = 0;
-        } else
-            updateCounter++;
-    }*/
 
     @Override
     public void resize(int width, int height) {

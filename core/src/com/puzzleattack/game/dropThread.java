@@ -4,9 +4,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 
-/**
- * Created by Dylan on 2016-01-31.
- */
 public class dropThread implements Runnable {
 
     private PuzzleAttack game;

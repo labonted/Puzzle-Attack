@@ -4,9 +4,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.puzzleattack.game.Screens.PlayScreen;
 
-/**
- * Created by Dylan on 2016-01-30.
- */
 public class clearThread implements Runnable {
 
     private PuzzleAttack game;

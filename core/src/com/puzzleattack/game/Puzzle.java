@@ -27,9 +27,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Dylan on 2016-01-21.
- */
 public class Puzzle {
 
     private int multiplier;
@@ -78,7 +75,6 @@ public class Puzzle {
     Texture combo = new Texture("Combo.png");
 
     public Puzzle(AssetManager assMan, PuzzleAttack puzz, Cursor cursor, PlayScreen play, int level) {
-        //create Array list to pass matches from
         renderMatch = new ArrayList<Match>();
 
         playScreen = play;
@@ -113,13 +109,6 @@ public class Puzzle {
         rows = tilemap.length;
         columns = tilemap[0].length;
 
-        /*//Fill tilemap with blocks randomly
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                tilemap[i][j] = new Block(i, j);
-            }
-        }*/
-
         // Initialize Tiles
         try {
             loadMap(Gdx.files.internal("tilemaps/blocks.txt"));
@@ -130,21 +119,6 @@ public class Puzzle {
     }
 
     private void loadMap(FileHandle filename) throws IOException {
-       /* ArrayList lines = new ArrayList();
-
-        BufferedReader reader = new BufferedReader(filename.reader());
-        while (true) {
-            String line = reader.readLine();
-
-            // no more lines to read
-            if (line == null) {
-                reader.close();
-                break;
-            }
-
-            lines.add(line);
-        }*/
-
         for (int i = 0; i < 10; i++) {
             String line = (String) game.blockList.get(i);
             for (int j = 0; j < 6; j++){
@@ -374,8 +348,6 @@ public class Puzzle {
         }
     }
 
-
-
     //Method to switch blocks
     public void switchBlocks(Block block) {
 
@@ -396,8 +368,7 @@ public class Puzzle {
             block.setBlockType(storeB);
             b.setBlockType(storeA);
 
-            // ... why did I do this again?
-            //RIGHT. Switched is the timer used for animating the switch,
+            //Switched is the timer used for animating the switch,
             // and if the block's type is not 0, animate it.
             if (!(storeB == 0))
                 block.setSwitched(80);
@@ -498,68 +469,9 @@ public class Puzzle {
                         moveTimer = 0;
                         break;
                 }
-
-                //noMove = 6;
-
-
-                /*switch (level){
-                    case 1:
-                        moveUp += 0.25;
-                        break;
-                    case 2:
-                        if(moveTimer == 30) {
-                            moveUp += 2;
-                            moveTimer = 0;
-                        }
-                        else
-                            moveTimer++;
-                        break;
-                    case 3:
-                        if(moveTimer == 30) {
-                            moveUp += 3;
-                            moveTimer = 0;
-                        }
-                        else
-                            moveTimer++;
-                        break;
-                    case 4:
-                        moveUp += 1;
-                        break;
-                    case 5:
-                        moveUp += 2;
-                        moveTimer = 0;
-                        break;
-                    case 6:
-                        moveUp += 3;
-                        moveTimer = 0;
-                        break;
-                    case 7:
-                        moveUp += 4;
-                        moveTimer = 0;
-                        break;
-                    case 8:
-                        moveUp += 5;
-                        moveTimer = 0;
-                        break;
-                    case 9:
-                        moveUp += 6;
-                        moveTimer = 0;
-                        break;
-                }
-
-                noMove = 6;*/
-
-
-                /*if(moveSpeed < 0){
-                    moveUp = moveUp + 2;
-                }
-                else
-                    moveUp = moveUp + 1;*/
-
             }
 
             if (moveUp >= 100 && !blockInTopRow) {
-
                 //if using the keyboard, move the cursor up 1 row with the blocks to keep it on the
                 // same blocks
                 if(keyboardCursor.isEnabled())
@@ -575,7 +487,6 @@ public class Puzzle {
                         }
                     }
                 }
-
                 //If the screen is touched, and is not in the top row, move up the touch cursor
                 //We do a try catch because touchedBlock can return null, so it will crash if we
                 // have nothing to check
@@ -598,7 +509,6 @@ public class Puzzle {
                     tilemap[i][j].update(i, j);
                 }
             }
-            //if(!blockInTopRow)
             noMove--;
 
             gameOverTimer = 0.5f;
@@ -644,15 +554,14 @@ public class Puzzle {
                         } else{
                             break;
                         }
-
                     }
 
                     //if we find at least 3 blocks of the same type beside each other, add them to
                     // the clearBlocks array
                     if (blocks.size() > 2) {
                         clearBlocks.addAll(blocks);
-
                     }
+
                     //remove all blocks from the blocks[] array so we can reuse it
                     blocks.removeAll(blocks);
 

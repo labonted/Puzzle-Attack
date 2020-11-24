@@ -19,10 +19,6 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.puzzleattack.game.PuzzleAttack;
 
-/**
- * Created by dlabonte on 19/12/2016.
- */
-
 public class DifficultyScreen implements Screen {
     private PuzzleAttack game;
     private OrthographicCamera gameCam;
@@ -45,8 +41,8 @@ public class DifficultyScreen implements Screen {
 
         skin = new Skin();
 
-        background = new Texture("back19.jpg");
-        background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        background = manager.get("TiledBack.jpg", Texture.class);
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         //create font
         font = new BitmapFont(Gdx.files.internal("fonts/font.fnt"),
@@ -76,12 +72,10 @@ public class DifficultyScreen implements Screen {
         skin.add("default", textButtonStyle);
         skin.add("Options", textButtonStyle);
 
-
         // Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
         final TextButton playButton = new TextButton("Start!",textButtonStyle);
         playButton.setPosition(120, 550);
         stage.addActor(playButton);
-
 
         // Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
         final TextButton backButton = new TextButton("Back",textButtonStyle);
@@ -95,20 +89,10 @@ public class DifficultyScreen implements Screen {
             }
         });
 
-
-        //slider settings
-        /*Pixmap knobMap = new Pixmap(50, 50, Pixmap.Format.RGBA8888);
-        knobMap.setColor(Color.BLUE);
-        knobMap.fill();*/
-
         Texture knob = new Texture("SmallKnob.png");
         knob.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);;
 
         skin.add("knob", knob);
-
-        //Pixmap sliderMap = new Pixmap(3000, 50, Pixmap.Format.RGBA8888);
-        //sliderMap.setColor(Color.BLUE);
-        //sliderMap.fill();
 
         Texture slideBar = new Texture("slidebar.png");
         slideBar.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);;
@@ -159,7 +143,7 @@ public class DifficultyScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
 
         game.batch.begin();
-        game.batch.draw(background, -850, 0, 2560, 1440);
+        game.batch.draw(background, (int)(gameCam.viewportWidth/2) * -1 , (int)(gameCam.viewportHeight/2) * -1, (int)(gameCam.viewportWidth), (int)(gameCam.viewportHeight), (int)(gameCam.viewportWidth * 1.5), (int)(gameCam.viewportHeight * 1.5));
         titleFont.draw(game.batch, "LeVel", 187, 1200);
         font.draw(game.batch, "Difficulty", 130, 920);
         font.draw(game.batch, Integer.toString((int)difficultySlider.getValue()), 585, 917);

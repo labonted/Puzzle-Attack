@@ -23,13 +23,9 @@ import com.puzzleattack.game.Puzzle;
 import com.puzzleattack.game.PuzzleAttack;
 import com.puzzleattack.game.Scenes.Hud;
 
-
-/**
- * Created by Dylan on 2016-01-03.
- */
 public class PlayScreen implements Screen {
     private PuzzleAttack game;
-    private static Texture background, hudImage, hudborder, playField, backgroundTexture;
+    private static Texture background, hudImage, hudborder, playField, backgroundTexture, pipe;
     public static Texture red, green, blue, purple, orange, darkRed, darkGreen, darkBlue, darkPurple, darkOrange, trash;
     private Pixmap borderBackground;
     private OrthographicCamera gameCam;
@@ -82,10 +78,12 @@ public class PlayScreen implements Screen {
 
         //Playfield Textures
         backgroundTexture = new Texture("borderColor.png");
-        background = new Texture("back15.jpg");
+        background = manager.get("TiledBack.jpg", Texture.class);
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         hudborder= new Texture("border.png");
         playField = new Texture("Playfield.png");
         hudImage = new Texture("Hud/HUD1.png");
+        pipe = manager.get("pipe.png", Texture.class);
 
         borderMove = 0;
         borderY = -2500;
@@ -136,19 +134,17 @@ public class PlayScreen implements Screen {
         trash = new Texture("blocks/trash.png");
 
         //texture filters
-        red.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        green.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        blue.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        purple.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        orange.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        red.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        green.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        blue.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        purple.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        orange.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
 
-        darkRed.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        darkGreen.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        darkBlue.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        darkPurple.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        darkOrange.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        darkRed.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        darkGreen.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        darkBlue.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        darkPurple.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        darkOrange.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
 
         //Dropped blocks animations
         TextureAtlas blueAtlas = new TextureAtlas(Gdx.files.internal("drop/blueDrop.pack"));
@@ -210,13 +206,11 @@ public class PlayScreen implements Screen {
         game.batch.begin();
 
         //Render Playfield
-        game.batch.draw(background, -850, 0, 2560, 1440);
+        game.batch.draw(background, (int)(gameCam.viewportWidth/2) * -1 , (int)(gameCam.viewportHeight/2) * -1, (int)(gameCam.viewportWidth), (int)(gameCam.viewportHeight), (int)(gameCam.viewportWidth * 1.5), (int)(gameCam.viewportHeight * 1.5));
         game.batch.draw(hudImage, 0, 1110 + borderY);
         game.batch.draw(backgroundTexture, 0, borderY);
         game.batch.draw(hudborder, 0, borderY);
         game.batch.draw(playField, 60, borderY);
-
-        //game.batch.draw(border, 0, 0);
 
         if(state == State.GAMEOVER && freezeDrop > 0.5)
             font.draw(game.batch, "Game Over", 257, 600);
@@ -241,25 +235,6 @@ public class PlayScreen implements Screen {
             // Loop though block array to display blocks
             for (int i = 0; i < puzzle.rows; i++) {
                 for (int j = 0; j < puzzle.columns; j++) {
-
-                    /*int mod_i;
-                    int mod_j;
-
-                    //mod _i and mod_j are used to change i and j to properly represent coordinates and
-                    //position the blocks in the playfield
-                    if(puzzle.getGameOverTimer() > 0 && shakeRight){
-                        mod_i = (100 * i) + 61 + puzzle.getTilemap(i, j).getSwitched() + ((int)puzzle.getGameOverTimer() * 3);
-                        mod_j = (100 * j) + puzzle.getMoveUp();
-                        shakeRight = false;
-                    } else if(puzzle.getGameOverTimer() > 0 && !shakeRight){
-                        mod_i = (100 * i) + 61 + puzzle.getTilemap(i, j).getSwitched() - ((int)puzzle.getGameOverTimer() * 3);
-                        mod_j = (100 * j) + puzzle.getMoveUp();
-                        shakeRight = true;
-                    }else{
-                        mod_i = (100 * i) + 61 + puzzle.getTilemap(i, j).getSwitched();
-                        mod_j = (100 * j) + puzzle.getMoveUp();
-                    }*/
-
 
                     int mod_i = (100 * i) + 61 + puzzle.getTilemap(i, j).getSwitched() + shake;
                     int mod_j = (100 * j) + puzzle.getMoveUp();
@@ -375,7 +350,8 @@ public class PlayScreen implements Screen {
             font.draw(game.batch, startTimerString, 352, 600);
         }
 
-        font.draw(game.batch, Float.toString(puzzle.getGameOverTimer()), 800, 1200);
+        game.batch.draw(pipe, 35, borderY + (pipe.getHeight() * -1));
+        //font.draw(game.batch, Float.toString(puzzle.getGameOverTimer()), 800, 1200);
 
         this.update(delta);
 
@@ -387,8 +363,6 @@ public class PlayScreen implements Screen {
 
     public void update(float delta)
     {
-        //update elapsed time for cursor animation
-
         // detects touch input
         Vector3 input = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         gameCam.unproject(input);
@@ -399,7 +373,6 @@ public class PlayScreen implements Screen {
         //if game isn't paused update hud and puzzle objects
         switch (state){
             case START:
-                //puzzle.moveUp = -1000;
                 if (borderY < 0) {
                     borderMove += 1;
                     borderY += borderMove;
@@ -429,12 +402,12 @@ public class PlayScreen implements Screen {
                 break;
             case PAUSE:
                 pause.play(game.sound);
-                music.setVolume((float)(game.volume * 0.1));
+                //music.setVolume((float)(game.volume * 0.1));
                 state = State.STOP;
                 break;
             case RESUME:
                 unpause.play(game.sound);
-                music.setVolume(game.volume);
+                //music.setVolume(game.volume);
                 state = State.RUN;
                 break;
             case STOP:

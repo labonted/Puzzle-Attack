@@ -7,7 +7,7 @@ import com.puzzleattack.game.PuzzleAttack;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 1280;
+		config.width = 720;
 		config.height = 720;
 		new LwjglApplication(new PuzzleAttack(), config);
 	}

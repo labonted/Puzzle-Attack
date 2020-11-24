@@ -4,9 +4,6 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.puzzleattack.game.Puzzle;
 
-/**
- * Created by Dylan on 2016-02-14.
- */
 public class Gesture implements GestureDetector.GestureListener {
 
     private Puzzle puzzle;

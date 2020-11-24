@@ -4,7 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.puzzleattack.game.Screens.GameOverScreen;
 import com.puzzleattack.game.Screens.LoadingScreen;
 import com.puzzleattack.game.Screens.MenuScreen;
@@ -14,7 +19,6 @@ import java.util.ArrayList;
 
 public class PuzzleAttack extends Game {
 	public SpriteBatch batch;
-	//public static final int V_HEIGHT= 1480;
 	public static final int V_HEIGHT= 1280;
 	public static final int V_WIDTH = 720;
 	public AssetManager manager;

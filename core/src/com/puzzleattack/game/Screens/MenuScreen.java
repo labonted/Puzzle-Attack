@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -19,9 +20,6 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.puzzleattack.game.PuzzleAttack;
 
-/**
- * Created by dlabonte on 26/04/2016.
- */
 public class MenuScreen implements Screen {
 
     private PuzzleAttack game;
@@ -31,10 +29,12 @@ public class MenuScreen implements Screen {
     private BitmapFont font, titleFont;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
+    private TextureRegion backTile1, backTile2;
     //uncomment for music, along with below block
     //private Music music;
+    boolean dark, newRow = true;
 
-    private static Texture background;
+    private Texture background;
 
     public MenuScreen(final PuzzleAttack game, AssetManager assMan) {
         this.game = game;
@@ -45,6 +45,13 @@ public class MenuScreen implements Screen {
 
         skin = new Skin();
 
+        //Screen settings
+        gameCam = new OrthographicCamera();
+        gameCam.setToOrtho(false, PuzzleAttack.V_WIDTH, PuzzleAttack.V_HEIGHT);
+        gamePort = new ExtendViewport(PuzzleAttack.V_WIDTH, PuzzleAttack.V_HEIGHT, gameCam);
+        gameCam.position.set(PuzzleAttack.V_WIDTH/2, PuzzleAttack.V_HEIGHT/2, 0);
+        stage.setViewport(gamePort);
+
         //uncomment for music, the mp3 file must be in assets
         /*if(game.volumeOn) {
             music = manager.get("audio/music/title_screen.mp3", Music.class);
@@ -53,7 +60,8 @@ public class MenuScreen implements Screen {
             music.play();
         }*/
 
-        background = new Texture("back19.jpg");
+        background = manager.get("TiledBack.jpg", Texture.class);
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         // Generate a 1x1 white texture and store it in the skin named "white".
@@ -107,13 +115,6 @@ public class MenuScreen implements Screen {
                 game.setScreen( new OptionScreen(game, manager));
             }
         });
-
-        //Screen settings
-        gameCam = new OrthographicCamera();
-        gameCam.setToOrtho(false, PuzzleAttack.V_WIDTH, PuzzleAttack.V_HEIGHT);
-        gamePort = new ExtendViewport(PuzzleAttack.V_WIDTH, PuzzleAttack.V_HEIGHT, gameCam);
-        gameCam.position.set(PuzzleAttack.V_WIDTH/2, PuzzleAttack.V_HEIGHT/2, 0);
-        stage.setViewport(gamePort);
     }
 
     public void render (float delta) {
@@ -122,8 +123,8 @@ public class MenuScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
 
         game.batch.begin();
-        //game.batch.draw(background, -850, 0, 2560, 1480);
-        game.batch.draw(background, -850, 0, 2560, 1440);
+        game.batch.draw(background, (int)(gameCam.viewportWidth/2) * -1 , (int)(gameCam.viewportHeight/2) * -1, (int)(gameCam.viewportWidth), (int)(gameCam.viewportHeight), (int)(gameCam.viewportWidth * 1.5), (int)(gameCam.viewportHeight * 1.5));
+
         titleFont.draw(game.batch, "PUzzLE", 140, 1200);
         titleFont.draw(game.batch, "AttACK", 140, 1000);
         game.batch.end();

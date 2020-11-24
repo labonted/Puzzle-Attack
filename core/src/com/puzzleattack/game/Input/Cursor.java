@@ -1,11 +1,7 @@
 package com.puzzleattack.game.Input;
 
-
 import com.badlogic.gdx.math.Vector2;
 
-/**
- * Created by dlabonte on 01/05/2016.
- */
 public class Cursor {
 
     private boolean enabled;
@@ -37,7 +33,6 @@ public class Cursor {
         }
     }
 
-
     public boolean isEnabled() {
         return enabled;
     }
@@ -49,5 +44,4 @@ public class Cursor {
     public Vector2 getCoordinates() {
         return coordinates;
     }
-
 }

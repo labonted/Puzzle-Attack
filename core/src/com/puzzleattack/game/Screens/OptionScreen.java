@@ -24,9 +24,6 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.puzzleattack.game.PuzzleAttack;
 
-/**
- * Created by dlabonte on 27/04/2016.
- */
 public class OptionScreen implements Screen {
 
     private PuzzleAttack game;
@@ -61,8 +58,8 @@ public class OptionScreen implements Screen {
 
         skin = new Skin();
 
-        background = new Texture("back19.jpg");
-        background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        background = manager.get("TiledBack.jpg", Texture.class);
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         // Generate a 1x1 white texture and store it in the skin named "white".
         Pixmap pixmap = new Pixmap(500, 200, Pixmap.Format.RGBA8888);
@@ -243,7 +240,7 @@ public class OptionScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
 
         game.batch.begin();
-        game.batch.draw(background, -850, 0, 2560, 1440);
+        game.batch.draw(background, (int)(gameCam.viewportWidth/2) * -1 , (int)(gameCam.viewportHeight/2) * -1, (int)(gameCam.viewportWidth), (int)(gameCam.viewportHeight), (int)(gameCam.viewportWidth * 1.5), (int)(gameCam.viewportHeight * 1.5));
         titleFont.draw(game.batch, "Options", 110, 1200);
         font.draw(game.batch, "Music Volume", 130, 900);
         font.draw(game.batch, "Sound Volume", 130, 700);

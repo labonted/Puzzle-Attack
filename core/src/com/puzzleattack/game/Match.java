@@ -1,8 +1,5 @@
 package com.puzzleattack.game;
 
-/**
- * Created by Dylan on 2016-03-24.
- */
 public class Match {
     private int count, multiplier;
     private int x;

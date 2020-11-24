@@ -7,9 +7,6 @@ import com.badlogic.gdx.math.Vector3;
 
 import java.util.Random;
 
-/**
- * Created by Dylan on 2016-01-03.
- */
 public class Block {
 
     int blockType, justMoved, multitimer, switched;
@@ -35,10 +32,6 @@ public class Block {
 
         trashSize = new Vector2(1, 1);
         firstTrash = false;
-
-        //create random blockType
-        //Random r = new Random();
-        //blockType = r.nextInt(6);
 
         blockType = type;
 
@@ -128,14 +121,6 @@ public class Block {
 
     public void setMultiTest(boolean multiTest) {
         this.multiTest = multiTest;
-    }
-
-    public int getMultitimer() {
-        return multitimer;
-    }
-
-    public void setMultitimer(int multitimer) {
-        this.multitimer = multitimer;
     }
 
     public float getDropped() {
