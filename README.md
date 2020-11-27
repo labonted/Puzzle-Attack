@@ -12,7 +12,10 @@ This project is licensed under [MIT](LICENSE).
 
 ## Description
 
-**Puzzle Attack** is a puzzle game based on the Panel de Pon/Puzzle League series of games from Nintendo and Intelligent Systems. It's written in Java using the [libGDX](https://libgdx.badlogicgames.com/) libraries. 
+**Puzzle Attack** is a puzzle game based on the Panel de Pon/Puzzle League series of games from Nintendo and Intelligent Systems. It can be compiled for both **Android and desktop** operating systems. It's written in Java using the [libGDX](https://libgdx.badlogicgames.com/) libraries. 
+
+![Puzzle Attack on Desktop](https://user-images.githubusercontent.com/74752903/100484649-50fa3000-30cb-11eb-9dbb-3ebefc98e1fb.gif)&nbsp;
+![Puzzle Attack on Android](https://user-images.githubusercontent.com/74752903/100484849-00370700-30cc-11eb-87c8-233abb59b150.gif)
 
 ## How To Play
 
@@ -49,7 +52,7 @@ To build the project:
    1. Desktop build is under `desktop/build/libs/*.jar`
    2. Android build is under `android/build/outputs/apk/debug/*.apk`
    
-   ## Disclaimer
+## Disclaimer
 
 **Puzzle Attack** is a game written in Java using the [libGDX](https://libgdx.badlogicgames.com/) libraries. It's 
 based on the Panel de Pon/Puzzle League series of games from Nintendo and Intelligent Systems. I am in no way affiliated with
